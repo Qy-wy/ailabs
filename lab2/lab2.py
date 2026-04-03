@@ -14,8 +14,7 @@ df = pd.read_csv('D:\\AI_ML\\lab1\\processed_ds.csv')
 X = df.drop(['bmi', 'id'], axis=1)
 y = df['bmi']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
-X_test, X_val, y_test, y_val = train_test_split(X_test, y_test, test_size=0.4, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 linear_model = LinearRegression()
 linear_model.fit(X_train, y_train)
@@ -41,7 +40,7 @@ print("RMSE:", root_mean_squared_error(y_test, y_pred_poly))
 print("MAE:", mean_absolute_error(y_test, y_pred_poly))
 
 ratios = [0.1, 0.5, 0.7, 0.9, 0.95, 0.99, 1]
-model_cv = ElasticNetCV(l1_ratio=ratios, alphas=100, cv=5, max_iter=10000)
+model_cv = ElasticNetCV(l1_ratio=ratios, alphas=100, max_iter=10000)
 model_cv.fit(X_train_poly, y_train)
 
 print(f"\nИдеальное alpha: {model_cv.alpha_}")
@@ -56,8 +55,7 @@ print("MAE:", mean_absolute_error(y_test, y_pred))
 X_cl = df.drop(['stroke', 'id'], axis=1)
 y_cl = df['stroke']
 
-X_cl_train, X_cl_test, y_cl_train, y_cl_test = train_test_split(X_cl, y_cl, test_size=0.4, random_state=42)
-X_cl_test, X_cl_val, y_cl_test, y_cl_val = train_test_split(X_cl_test, y_cl_test, test_size=0.4, random_state=42)
+X_cl_train, X_cl_test, y_cl_train, y_cl_test = train_test_split(X_cl, y_cl, test_size=0.2, random_state=42)
 
 logreg_model = LogisticRegression(class_weight='balanced')
 logreg_model.fit(X_cl_train, y_cl_train)
